@@ -104,7 +104,6 @@ function Details(user) {
   };
 
   const clickTransfers = async () => {
-    updateAmount("608483d09161bc52f41db947 ", 1000);
     const data = await collectingData("transitions");
     resetAllData();
     resetForm();
@@ -169,8 +168,25 @@ function Details(user) {
 
   const updateAmount = async (accountId, amount) => {
     try {
+      console.log(`${baseURL}/accounts/${accountId}/?amount=${amount}`);
       const { data } = await axios.patch(
         `${baseURL}/accounts/${accountId}/?amount=${amount}`
+      );
+      console.log(data);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  };
+
+  const createAccount = async (userId, userName) => {
+    try {
+      const { data } = await axios.post(
+        `${baseURL}/accounts/`,{
+          name: userName,
+          _id: userId
+        }
       );
       console.log(data);
       return data;
