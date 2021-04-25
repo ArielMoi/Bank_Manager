@@ -94,8 +94,7 @@ function Details(user) {
   };
 
   const onClickAddButton = () => {
-    resetAllData();
-    setFormVisibility("visible");
+    setFormVisibility(formVisibility === "visible" ? "hidden" : "visible");
   };
 
   const onFirstChange = (text) => {
@@ -155,8 +154,6 @@ function Details(user) {
         onClickTransfer={clickTransfers}
       />
       <button onClick={onClickAddButton}>{buttonText}</button>
-      {userDetails && <button>deposit</button>}
-      {userDetails && <button>withdraw</button>}
       <div className="details">
         {userDetails &&
           Object.values(userDetails).map((user) => {
