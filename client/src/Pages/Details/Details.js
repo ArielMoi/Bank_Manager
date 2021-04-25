@@ -3,9 +3,9 @@ import DetailsWindow from "../../Components/DetailsWindow/DetailsWindow.Componen
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "../../Components/Form/Form.Component.js";
-import './Details.css'
+import "./Details.css";
 
-import baseURL from '../../API/api.js';
+import baseURL from "../../API/api.js";
 
 function Details(user) {
   const [userDetails, setUserDetails] = useState({});
@@ -22,39 +22,59 @@ function Details(user) {
   const [thirdValue, setThirdValue] = useState("");
 
   const collectingData = async (dataType) => {
-    const { data } = await axios.get(`${baseURL}/${dataType}/`);
-    return data;
+    try {
+      const { data } = await axios.get(`${baseURL}/${dataType}/`);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
   };
 
   const addingDataUsers = async (dataToPost) => {
-    const { data } = await axios.post(`${baseURL}/users/`, {
-      name: dataToPost.name,
-      age: dataToPost.age,
-      email: dataToPost.email,
-    });
-    console.log(data);
-    return data;
+    try {
+      const { data } = await axios.post(`${baseURL}/users/`, {
+        name: dataToPost.name,
+        age: dataToPost.age,
+        email: dataToPost.email,
+      });
+      console.log(data);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
   };
 
   const addingDataAccounts = async (dataToPost) => {
-    const { data } = await axios.post(`${baseURL}/accounts/`, {
-      credit: dataToPost.credit,
-      cash: dataToPost.cash,
-      user_id: dataToPost.user_id,
-      user_name: dataToPost.user_name,
-    });
-    console.log(data);
-    return data;
+    try {
+      const { data } = await axios.post(`${baseURL}/accounts/`, {
+        credit: dataToPost.credit,
+        cash: dataToPost.cash,
+        user_id: dataToPost.user_id,
+        user_name: dataToPost.user_name,
+      });
+      console.log(data);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
   };
 
   const addingDataTransfers = async (dataToPost) => {
-    const { data } = await axios.post(`${baseURL}/transitions/`, {
-      transferringAccount: dataToPost.transferringAccount,
-      receivingAccount: dataToPost.receivingAccount,
-      amount: dataToPost.amount,
-    });
-    console.log(data);
-    return data;
+    try {
+      const { data } = await axios.post(`${baseURL}/transitions/`, {
+        transferringAccount: dataToPost.transferringAccount,
+        receivingAccount: dataToPost.receivingAccount,
+        amount: dataToPost.amount,
+      });
+      console.log(data);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
   };
 
   const resetAllData = () => {
@@ -76,7 +96,7 @@ function Details(user) {
   const clickAccounts = async () => {
     const data = await collectingData("accounts");
     resetAllData();
-    resetForm(); 
+    resetForm();
     setAccountDetails(data);
     setFormType("accounts");
 
@@ -84,9 +104,10 @@ function Details(user) {
   };
 
   const clickTransfers = async () => {
+    updateAmount("608483d09161bc52f41db947 ", 1000);
     const data = await collectingData("transitions");
     resetAllData();
-    resetForm(); 
+    resetForm();
     setTransfersDetails(data);
     setFormType("transfers");
 
@@ -125,7 +146,7 @@ function Details(user) {
           email: secondValue,
           age: thirdValue,
         });
-        resetForm()
+        resetForm();
         return user;
       case "accounts":
         const account = await addingDataAccounts({
@@ -133,7 +154,7 @@ function Details(user) {
           cash: secondValue,
           credit: thirdValue,
         });
-        resetForm()
+        resetForm();
         return account;
       case "transfers":
         const transfer = await addingDataTransfers({
@@ -141,8 +162,21 @@ function Details(user) {
           transferringAccount: firstValue,
           receivingAccount: secondValue,
         });
-        resetForm()
+        resetForm();
         return transfer;
+    }
+  };
+
+  const updateAmount = async (accountId, amount) => {
+    try {
+      const { data } = await axios.patch(
+        `${baseURL}/accounts/${accountId}/?amount=${amount}`
+      );
+      console.log(data);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return e;
     }
   };
 
@@ -160,7 +194,7 @@ function Details(user) {
             return (
               <DetailsWindow
                 subHeadLine={user.name}
-                description={`${user.age}, ${user.email}`}
+                description={`${user.age}, ${user.email}, ${user._id}`}
               />
             );
           })}
@@ -169,7 +203,7 @@ function Details(user) {
             return (
               <DetailsWindow
                 headLine={account.user_name}
-                subHeadLine={`Cash: ${account.cash}, \nCredit: ${account.credit}`}
+                subHeadLine={`ID: ${account._id} Cash: ${account.cash}, \nCredit: ${account.credit}`}
                 description={`${Object.values(account.transitions).map(
                   (transfer) =>
                     `Date: ${transfer.date} Amount: ${transfer.amount}`

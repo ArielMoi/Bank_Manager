@@ -39,16 +39,4 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 
-router.patch("/users/:id", async (req, res) => {
-  try {
-    if (!req.query.amount){
-      res.status(400).send('no amount stated.');
-    }
-    const userUpdated = await updateAccount(req.params.id, req.query.amount);
-    res.status(200).send(userUpdated);
-  } catch (e) {
-    res.status(400).send(e.message);
-  }
-});
-
 module.exports = router;

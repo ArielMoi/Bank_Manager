@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const Account = require('../models/account.js')
+const {updateAccount,createAccount} = require('../utilities.js')
 
 router.get('/accounts/', async (req, res) => {
     try {
@@ -20,15 +21,14 @@ router.get('/accounts/:id', async (req, res) => {
     }
 })
 
-
-// router.post("/accounts/", async (req, res) => {
-//   try {
-//     const { user, userAccount } = await createUser(req.body);
-//     res.status(200).send({ user, userAccount });
-//   } catch (e) {
-//     res.status(400).send(e.message);
-//   }
-// });
+router.post("/accounts/", async (req, res) => {
+  try {
+    const userAccount = await createAccount(req.body);
+    res.status(200).send(userAccount);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
 
 router.delete("/accounts/:id", async (req, res) => {
   try {
@@ -39,5 +39,18 @@ router.delete("/accounts/:id", async (req, res) => {
     res.status(400).send(e.message);
   }
 });
+
+router.patch("/accounts/:id", async (req, res) => {
+  try {
+    if (!req.query.amount) {
+      res.status(400).send("no amount stated.");
+    }
+    const accountUpdated = await updateAccount(req.params.id, req.query.amount);
+    res.status(200).send(accountUpdated);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
 
 module.exports = router;

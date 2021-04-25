@@ -4,7 +4,6 @@ const Account = require("./models/account");
 const Transition = require("./models/transition");
 const { ObjectID } = require("mongodb");
 
-
 const createUser = (details) => {
   const user = new User({
     name: details.name,
@@ -14,7 +13,7 @@ const createUser = (details) => {
 
   const userAccount = new Account({
     user_id: user._id,
-    user_name: user.name
+    user_name: user.name,
   });
 
   try {
@@ -25,6 +24,21 @@ const createUser = (details) => {
   }
 
   return { user, userAccount };
+};
+
+const createAccount = async (user) => {
+  const userAccount = new Account({
+    user_id: user._id,
+    user_name: user.name,
+  });
+
+  try {
+    userAccount.save().then(() => console.log("Account created:"));
+  } catch (e) {
+    throw new Error(e);
+  }
+
+  return userAccount;
 };
 
 const updateAccount = async (accountId, amount) => {
@@ -64,7 +78,7 @@ const makeTransition = async (
 
     transition = new Transition({
       amount,
-      transferringAccount:transferringAccount,
+      transferringAccount: transferringAccount,
       receivingAccount: receivingAccount,
     });
 
@@ -88,4 +102,4 @@ const makeTransition = async (
   return { transferringAccount, receivingAccount, transition };
 };
 
-module.exports = { createUser, makeTransition, updateAccount };
+module.exports = { createUser, makeTransition, updateAccount, createAccount };
