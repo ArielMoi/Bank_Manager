@@ -1,0 +1,14 @@
+button {
+  background: transparent;
+  padding: 5px 25px;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid black;
+  margin-left: 80%;
+  border-radius: 5px;
+}
+
+button:hover {
+  color: wheat;
+  border: 2px solid wheat;
+}

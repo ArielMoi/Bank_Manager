@@ -1,0 +1,22 @@
+.details-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #fff;
+  background: black;
+  height: 7vh;
+}
+
+.details-nav ol li {
+  display: inline-block;
+  padding: 1px 50px;
+}
+
+.details-nav h3 {
+  font-style: none;
+  cursor: pointer;
+}
+
+.details-nav h3:hover {
+  color: wheat;
+}

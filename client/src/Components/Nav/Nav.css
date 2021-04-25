@@ -1,0 +1,27 @@
+.Nav {
+  display: flex;
+  /* justify-content: space-evenly; */
+  color: #fff;
+  background: black;
+  /* height: 9vh; */
+}
+
+.Nav ol li {
+  display: inline-block;
+  padding: 5px;
+}
+
+.Nav a {
+  font-style: none;
+  color: #fff;
+}
+
+.Nav a:hover {
+  color: wheat;
+}
+
+@media (max-width: 860px) {
+  .Nav {
+    height: 12vh;
+  }
+}

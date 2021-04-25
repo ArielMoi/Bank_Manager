@@ -1,0 +1,26 @@
+.sign-form > * {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.sign-form {
+  height: 350px;
+  border-radius: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.sign-form > button {
+  margin-left: 31%;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.sign-form > button:hover {
+  background: wheat;
+}
