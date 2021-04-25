@@ -1,0 +1,12 @@
+.details-window {
+  background-color: rgba(0, 0, 0, 0.562);
+  padding: 20px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.details-window > button {
+  position: absolute;
+  bottom: 10%;
+  /* margin: 5px; */
+}

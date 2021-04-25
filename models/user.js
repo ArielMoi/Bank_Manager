@@ -13,7 +13,8 @@ const User = mongoose.model("User", {
             if(!validator.isEmail(value)){
                 throw new Error('not a valid email')
             }
-        }
+        },
+        unique: true,
     }, 
     age: {
         type: Number,

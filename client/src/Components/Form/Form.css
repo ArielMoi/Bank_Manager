@@ -12,6 +12,9 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  background: wheat;
+  padding: 80px;
+  padding-top: 40px;
 }
 
 .sign-form > button {
@@ -22,5 +25,5 @@
 }
 
 .sign-form > button:hover {
-  background: wheat;
+  color: white;
 }

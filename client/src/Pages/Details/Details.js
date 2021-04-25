@@ -115,9 +115,6 @@ function Details(user) {
     setSecondValue("");
     setThirdValue("");
     setFormVisibility("hidden");
-    setFirstValue('');
-    setSecondValue('');
-    setThirdValue('');
   };
 
   const onSubmitForm = async (event) => {
@@ -158,42 +155,46 @@ function Details(user) {
         onClickTransfer={clickTransfers}
       />
       <button onClick={onClickAddButton}>{buttonText}</button>
-      {userDetails &&
-        Object.values(userDetails).map((user) => {
-          return (
-            <DetailsWindow
-              subHeadLine={user.name}
-              description={`${user.age}, ${user.email}`}
-            />
-          );
-        })}
-      {accountDetails &&
-        Object.values(accountDetails).map((account) => {
-          return (
-            <DetailsWindow
-              headLine={account.user_name}
-              subHeadLine={`Cash: ${account.cash}, \nCredit: ${account.credit}`}
-              description={`${Object.values(account.transitions).map(
-                (transfer) =>
-                  `Date: ${transfer.date} Amount: ${transfer.amount}`
-              )}`}
-            />
-          );
-        })}
-      {transfersDetails &&
-        Object.values(transfersDetails).map((transfer) => {
-          return (
-            <DetailsWindow
-              headLine={`Amount: ${transfer.amount}`}
-              subHeadLine={`ID: ${transfer._id}`}
-              description={`receiver: ${
-                Object.entries(transfer.receivingAccount)[5][1]
-              }, transferring: ${
-                Object.entries(transfer.transferringAccount)[5][1]
-              }`}
-            />
-          );
-        })}
+      {userDetails && <button>deposit</button>}
+      {userDetails && <button>withdraw</button>}
+      <div className="details">
+        {userDetails &&
+          Object.values(userDetails).map((user) => {
+            return (
+              <DetailsWindow
+                subHeadLine={user.name}
+                description={`${user.age}, ${user.email}`}
+              />
+            );
+          })}
+        {accountDetails &&
+          Object.values(accountDetails).map((account) => {
+            return (
+              <DetailsWindow
+                headLine={account.user_name}
+                subHeadLine={`Cash: ${account.cash}, \nCredit: ${account.credit}`}
+                description={`${Object.values(account.transitions).map(
+                  (transfer) =>
+                    `Date: ${transfer.date} Amount: ${transfer.amount}`
+                )}`}
+              />
+            );
+          })}
+        {transfersDetails &&
+          Object.values(transfersDetails).map((transfer) => {
+            return (
+              <DetailsWindow
+                headLine={`Amount: ${transfer.amount}`}
+                subHeadLine={`ID: ${transfer._id}`}
+                description={`receiver: ${
+                  Object.entries(transfer.receivingAccount)[5][1]
+                }, transferring: ${
+                  Object.entries(transfer.transferringAccount)[5][1]
+                }`}
+              />
+            );
+          })}
+      </div>
       <Form
         type={formType}
         formVisibility={formVisibility}
