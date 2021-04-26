@@ -52,5 +52,4 @@ router.patch("/accounts/:id", async (req, res) => {
   }
 });
 
-
 module.exports = router;

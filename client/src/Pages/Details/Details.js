@@ -117,18 +117,6 @@ function Details(user) {
     setFormVisibility(formVisibility === "visible" ? "hidden" : "visible");
   };
 
-  const onFirstChange = (text) => {
-    setFirstValue(text);
-  };
-
-  const onSecondChange = (text) => {
-    setSecondValue(text);
-  };
-
-  const onThirdChange = (text) => {
-    setThirdValue(text);
-  };
-
   const resetForm = () => {
     setFirstValue("");
     setSecondValue("");
@@ -182,12 +170,10 @@ function Details(user) {
 
   const createAccount = async (userId, userName) => {
     try {
-      const { data } = await axios.post(
-        `${baseURL}/accounts/`,{
-          name: userName,
-          _id: userId
-        }
-      );
+      const { data } = await axios.post(`${baseURL}/accounts/`, {
+        name: userName,
+        _id: userId,
+      });
       console.log(data);
       return data;
     } catch (e) {
@@ -245,9 +231,9 @@ function Details(user) {
       <Form
         type={formType}
         formVisibility={formVisibility}
-        changeFirst={(event) => onFirstChange(event.target.value)}
-        changeSecond={(event) => onSecondChange(event.target.value)}
-        changeThree={(event) => onThirdChange(event.target.value)}
+        changeFirst={(event) => setFirstValue(event.target.value)}
+        changeSecond={(event) => setSecondValue(event.target.value)}
+        changeThree={(event) => setThirdValue(event.target.value)}
         signFormSubmit={onSubmitForm}
         valueFirst={firstValue}
         valueSecond={secondValue}

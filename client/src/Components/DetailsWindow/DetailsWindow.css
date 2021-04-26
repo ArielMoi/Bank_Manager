@@ -1,8 +1,10 @@
 .details-window {
-  background-color: rgba(0, 0, 0, 0.562);
+  background-color: rgba(0, 0, 0, 0.87);
   padding: 20px;
   border: 1px solid black;
   position: relative;
+  color: wheat;
+  margin: 5px;
 }
 
 .details-window > button {
