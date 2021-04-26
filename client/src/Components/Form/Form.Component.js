@@ -1,5 +1,4 @@
 import "./Form.css";
-import { Link } from "react-router-dom";
 
 const Form = (props) => {
   let firstLabel;
@@ -13,8 +12,8 @@ const Form = (props) => {
       break;
     case "accounts":
       firstLabel = "user id:";
-      secondLabel = "cash:";
-      thirdLabel = "Credit: ";
+      secondLabel = "user name";
+      thirdLabel = "Cash:";
       break;
     case "transfers":
       firstLabel = "transferring id:";

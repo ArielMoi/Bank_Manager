@@ -136,11 +136,10 @@ function Details(user) {
         resetForm();
         return user;
       case "accounts":
-        const account = await addingDataAccounts({
-          user_id: firstValue,
-          cash: secondValue,
-          credit: thirdValue,
-        });
+        const account = await createAccount(firstValue, secondValue);
+        if (thirdValue > 0){ // adding start money
+          updateAmount(account._id, thirdValue);
+        }
         resetForm();
         return account;
       case "transfers":
@@ -156,7 +155,6 @@ function Details(user) {
 
   const updateAmount = async (accountId, amount) => {
     try {
-      console.log(`${baseURL}/accounts/${accountId}/?amount=${amount}`);
       const { data } = await axios.patch(
         `${baseURL}/accounts/${accountId}/?amount=${amount}`
       );
@@ -245,4 +243,7 @@ function Details(user) {
 
 export default Details;
 
+
+// TODO:
 // add current data to show whats created
+// add deposit, withdraw and delete to each account
